@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <h1>Welcome to Your Application</h1>
+    <h1>Welcome tosdf Your Application</h1>
 
     <div>
         <a href="{{ route('diaconos.index') }}">
