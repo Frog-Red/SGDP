@@ -11,38 +11,44 @@
 
     <h1>Welcome to Your Application</h1>
 
-    <a href="{{ route('diaconos.create') }}">
-        <button>Add Diacono</button>
-    </a>
+    <div>
+        <a href="{{ route('diaconos.index') }}">
+            <button>Diaconos</button>
+        </a>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Rut</th>
-                <th>Nombre</th>
-                <th>Actions</th> <!-- Add a new column for actions -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($diaconos as $diacono)
-                <tr>
-                    <td>{{ $diacono->Rut }}</td>
-                    <td>{{ $diacono->Nombre }}</td>
+        <a href="{{ route('hijos.index') }}">
+            <button>Hijos</button>
+        </a>
 
+        <a href="{{ route('parroquia.index') }}">
+            <button>Parroquias</button>
+        </a>
 
-                    <td>
-                        <form method="post" action="{{ route('diaconos.destroy', $diacono->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
+        <a href="{{ route('vicaria_zonal.index') }}">
+            <button>Vicaria Zonal</button>
+        </a>
 
-                    
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        <a href="{{ route('vicaria_ambiental.index') }}">
+            <button>Vicaria Ambiental</button>
+        </a>
+
+        <a href="{{ route('rol_pastoral.index') }}">
+            <button>Rol Pastoral</button>
+        </a>
+
+        <a href="{{ route('tipo_evento.index') }}">
+            <button>Tipo de Evento</button>
+        </a>
+
+        <a href="{{ route('historial_diacono.index') }}">
+            <button>Historial Diacono</button>
+        </a>
+
+        <a href="{{ route('rol_diacono.index') }}">
+            <button>Rol Diacono</button>
+        </a>
+
+    </div>
 
 </body>
 </html>

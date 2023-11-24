@@ -13,7 +13,7 @@ class DiaconoController extends Controller
     public function index()
     {
         $diaconos = Diacono::all();
-        return view('welcome', compact('diaconos'));
+        return view('diaconos.index', compact('diaconos'));
     }
 
     public function create()
@@ -23,32 +23,7 @@ class DiaconoController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the data
-        $request->validate([
-            'nombre' => 'required|string',
-            'rut' => 'required|string|unique:diaconos', // Assuming 'rut' should be unique in the 'diaconos' table
-            'estadoVigencia' => 'required|string',
-            'fechaNacimiento' => 'required|date',
-            'fechaOrdenacion' => 'required|date',
-            'lugarOrdenacion' => 'required|string',
-            'nombreObispoOrdeno' => 'required|string',
-            'profesionOficio' => 'required|string',
-            'parroquiaAsignada' => 'nullable|string',
-            'vicariaAmbientalAsignada' => 'nullable|string',
-            'direccionParticular' => 'required|string',
-            'telefonoCelular' => 'required|string',
-            'telefonoFijo' => 'required|string',
-            'correoElectronico' => 'required|email',
-            'indicadorDefuncion' => 'nullable|string',
-            'fechaDefuncion' => 'nullable|date',
-            'estadoCivil' => 'required|string',
-            'nombreEsposa' => 'nullable|string',
-            'rutEsposa' => 'nullable|string',
-            'fechaNacimientoEsposa' => 'nullable|date',
-            'fechaMatrimonio' => 'nullable|date',
-            'fechaDefuncionEsposa' => 'nullable|date',
-        ]);
-
+       
         // Exclude _token from the request data
         $data = $request->except('_token');
 
@@ -56,7 +31,7 @@ class DiaconoController extends Controller
         Diacono::create($data);
 
         // Redirect or do something else after saving...
-        return redirect()->route('welcome');
+        return redirect()->route('diaconos.index');
     }
 
     public function show($id)
@@ -74,7 +49,13 @@ class DiaconoController extends Controller
     public function update(Request $request, $id)
     {
         $diacono = Diacono::find($id);
-        $diacono->update($request->all());
+        
+        // Exclude _token from the update fields
+        $data = $request->except(['_token']);
+    
+        // Update the diacono with the remaining fields
+        $diacono->update($data);
+    
         return redirect()->route('diaconos.index')->with('success', 'Diacono updated successfully');
     }
 

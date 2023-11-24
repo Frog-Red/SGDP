@@ -2,55 +2,55 @@
 
 namespace App\Http\Controllers;
 
-// app/Http/Controllers/VicariaZonalController.php
+// app/Http/Controllers/vicaria_zonalController.php
 
-use App\Models\VicariaZonal;
+use App\Models\vicaria_zonal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VicariaZonalController extends Controller
+class vicariazonalController extends Controller
 {
     public function index()
     {
-        $vicariaZonales = VicariaZonal::all();
-        return view('vicaria_zonales.index', compact('vicariaZonales'));
+        $vicaria_zonal = vicaria_zonal::all();
+        return view('vicaria_zonal.index', compact('vicaria_zonal'));
     }
 
     public function create()
     {
-        return view('vicaria_zonales.create');
+        return view('vicaria_zonal.create');
     }
 
     public function store(Request $request)
     {
-        $vicariaZonal = VicariaZonal::create($request->all());
-        return redirect()->route('vicaria_zonales.index')->with('success', 'Vicaria Zonal created successfully');
+        $vicaria_zonal = vicaria_zonal::create($request->all());
+        return redirect()->route('vicaria_zonal.index')->with('success', 'Vicaria zonal created successfully');
     }
 
     public function show($id)
     {
-        $vicariaZonal = VicariaZonal::find($id);
-        return view('vicaria_zonales.show', compact('vicariaZonal'));
+        $vicaria_zonal = vicaria_zonal::find($id);
+        return view('vicaria_zonal.show', compact('vicaria_zonal'));
     }
 
     public function edit($id)
     {
-        $vicariaZonal = VicariaZonal::find($id);
-        return view('vicaria_zonales.edit', compact('vicariaZonal'));
+        $vicaria_zonal = vicaria_zonal::find($id);
+        return view('vicaria_zonal.edit', compact('vicaria_zonal'));
     }
 
     public function update(Request $request, $id)
     {
-        $vicariaZonal = VicariaZonal::find($id);
-        $vicariaZonal->update($request->all());
-        return redirect()->route('vicaria_zonales.index')->with('success', 'Vicaria Zonal updated successfully');
+        $vicaria_zonal = vicaria_zonal::find($id);
+        $vicaria_zonal->update($request->all());
+        return redirect()->route('vicaria_zonal.index')->with('success', 'Vicaria zonal updated successfully');
     }
 
     public function destroy($id)
     {
-        $vicariaZonal = VicariaZonal::find($id);
-        $vicariaZonal->delete();
-        return redirect()->route('vicaria_zonales.index')->with('success', 'Vicaria Zonal deleted successfully');
+        $vicaria_zonal = vicaria_zonal::find($id);
+        $vicaria_zonal->delete();
+        return redirect()->route('vicaria_zonal.index')->with('success', 'Vicaria zonal deleted successfully');
     }
 }
 
