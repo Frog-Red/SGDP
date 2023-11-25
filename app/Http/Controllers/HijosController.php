@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 // app/Http/Controllers/HijosController.php
-
+use App\Models\Diacono; // Adjust the namespace as needed
 use App\Models\Hijos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +18,8 @@ class HijosController extends Controller
 
     public function create()
     {
-        return view('hijos.create');
+        $diaconos = Diacono::all();
+        return view('hijos.create', compact('diaconos'));
     }
 
     public function store(Request $request)

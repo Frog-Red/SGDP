@@ -24,9 +24,13 @@
     <form method="post" action="{{ route('hijos.store') }}">
         @csrf
 
-        <label for="RutDiáconoPadre">Rut Diácono Padre:</label>
-        <input type="text" name="RutDiáconoPadre" value="{{ old('RutDiáconoPadre') }}" required>
-
+        <label for="RutDiáconoPadre" class="form-label">Rut del Padre Diácono:</label>
+        <select class="form-select" id="RutDiáconoPadre" name="RutDiáconoPadre">
+            <option value="">Selecciona un Rut</option>
+            @foreach($diaconos as $diacono)
+                <option value="{{ $diacono->Rut }}">{{ $diacono->Rut }} - {{ $diacono->Nombre }}</option>
+            @endforeach
+        </select>
         <label for="RutHijo">Rut Hijo:</label>
         <input type="text" name="RutHijo" value="{{ old('RutHijo') }}" required>
 

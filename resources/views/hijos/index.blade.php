@@ -204,7 +204,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="{{ route('diaconos.create') }}" class="btn btn-success btn-icon-split">
+                    <a href="{{ route('hijos.create') }}" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>

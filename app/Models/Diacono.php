@@ -39,5 +39,9 @@ class Diacono extends Model
 
     public $timestamps = true; // Set to false if you don't want timestamps (created_at, updated_at)
 
+    public function hijos()
+    {
+        return $this->hasMany(Hijo::class, 'RutDiáconoPadre', 'Rut');
+    }
     // Additional model configurations or relationships can be added here
 }

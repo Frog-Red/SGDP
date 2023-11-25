@@ -22,6 +22,10 @@ class Hijos extends Model
 
     public $timestamps = true;
 
+    public function padre()
+    {
+        return $this->belongsTo(Diacono::class, 'RutDiáconoPadre', 'Rut');
+    }
     // Define relationships if any
     // For example, if Hijo belongs to Diacono
     // public function diacono()

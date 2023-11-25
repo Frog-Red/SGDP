@@ -23,7 +23,10 @@ class DiaconoController extends Controller
 
     public function store(Request $request)
     {
-       
+        $request->validate([
+            'RutDiáconoPadre' => 'exists:diaconos,Rut',
+            // Add other validation rules for other fields
+        ]);
         // Exclude _token from the request data
         $data = $request->except('_token');
 

@@ -50,25 +50,44 @@
                 <span>Inicio</span></a>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Diaconos</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Diaconos:</h6>
-                    <a class="collapse-item" href="{{ route('diaconos.index') }}">Lista de Diaconos</a>
-                    <a class="collapse-item" href="{{ route('hijos.index') }}">Hijos</a>
-                    <a class="collapse-item" href="{{ route('historial_diacono.index') }}">Historial</a>
-                    <a class="collapse-item" href="{{ route('rol_diacono.index') }}">Roles</a>
-                </div>
-            </div>
-        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">    
         
+        <div class="sidebar-heading">
+            Diaconos
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('diaconos.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Diaconos</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('hijos.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Hijos</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('historial_diacono.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Historial Diaconos</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('rol_diacono.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Roles de Diaconos</span></a>
+        </li>        
+
+        
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <div class="sidebar-heading">
+           Iglesia
+        </div>
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item ">
             <a class="nav-link" href="{{ route('parroquia.index') }}">
@@ -89,20 +108,20 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Eventos</span></a>
         </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Vicarias</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Vicarias:</h6>
-                    <a class="collapse-item" href="{{ route('vicaria_ambiental.index') }}">Vicaria ambiental</a>
-                    <a class="collapse-item" href="{{ route('vicaria_zonal.index') }}">Vicaria Zonal</a>
-            </div>
+        <div class="sidebar-heading">
+            Vicarias
+         </div>
+         <li class="nav-item ">
+            <a class="nav-link" href="{{ route('vicaria_ambiental.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Vicaria ambiental</span></a>
+        </li>        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('vicaria_zonal.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Vicaria Zonal</span></a>
         </li>
 
         <!-- Divider -->
@@ -138,7 +157,7 @@
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
@@ -164,7 +183,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->email }}  </span>
                             <img class="img-profile rounded-circle"
                                 src="img/undraw_profile.svg">
@@ -187,7 +206,9 @@
                             <div class="dropdown-divider"></div>
                             <center><form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-warning btn-icon-split"><i class="fas fa-exclamation-triangle"></i> Logout</button>
+                                <button type="submit" class="btn btn-warning btn-icon-split"><span class="icon text-white-50">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span> <span class="text">Salir</span></button>
                             </form></center>
                         </div>
                     </li>
@@ -204,81 +225,83 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="{{ route('diaconos.create') }}" class="btn btn-success btn-icon-split">
+
+                    <button type="button" class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#createDiaconoModal">
                         <span class="icon text-white-50">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                        <span class="text">Agregar Diacono</span>
-                    </a>
+                            <i class="fas fa-check"></i>
+                        </span> <span class="text">Crear diacono</span>
+                    </button>
+
                 </div>
+                <div class="modal fade" id="createDiaconoModal" tabindex="-1" role="dialog" aria-labelledby="createDiaconoModalLabel" aria-hidden="true">
+                    @include('diaconos.create')
+                </div>
+                
                 <div class="card-body">
-                    <div class="table-container table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="300%" cellspacing="0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                                    <th>Ver</th>
                                                     <th>Rut</th>
                                                     <th>Nombre</th>
-                                                    <th>Estado de Vigencia</th>
-                                                    <th>Fecha de Nacimiento</th>
-                                                    <th>Fecha de Ordenacion</th>
-                                                    <th>Lugar de Ordenacion</th>
-                                                    <th>Obispo que Ordeno</th>
-                                                    <th>Profesion/Oficio</th>
-                                                    <th>Parroquia Asignada</th>
-                                                    <th>Vicaria Ambiental Asignada</th>
-                                                    <th>Direccion Particular</th>
-                                                    <th>Telefono Celular</th>
-                                                    <th>Telefono Fijo</th>
+                                                    <th>Vigencia</th>
+                                                    <th>Nacimiento</th>
+                                                    <th>Direccion</th>
                                                     <th>Correo Electronico</th>
-                                                    <th>Indicador Defuncion</th>
-                                                    <th>Fecha Defuncion</th>
-                                                    <th>Estado Civil</th>
-                                                    <th>Nombre Esposa</th>
-                                                    <th>Rut Esposa</th>
-                                                    <th>Fecha Nacimiento Esposa</th> 
-                                                    <th>Fecha Matrimonio</th>
-                                                    <th>Fecha Defuncion Esposa</th>               
-                                                <th>Actions</th> <!-- Add a new column for actions -->
+                                                    <th>Indicador Defuncion</th>            
+                                                    <th>Editar</th>
+                                                    <th>Eliminar</th> <!-- Add a new column for actions -->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($diaconos as $DIACONO)
                                                 <tr>
+                                                    <td>
+                                                            <button type="button" class="btn btn-info btn-icon-split" data-bs-toggle="modal" data-bs-target="#viewDiaconoModal{{ $DIACONO->id }}" > <span class="icon text-white-50">
+                                                                <i class="fas fa-info-circle"></i>
+                                                            </span> <span class="text">Info</span></button>
+                                                            
+                                                            <div class="modal fade" id="viewDiaconoModal{{ $DIACONO->id }}" tabindex="-1" role="dialog" aria-labelledby="viewDiaconoModalLabel{{ $DIACONO->id }}" aria-hidden="true">
+                                                                @include('diaconos.view', ['diacono' => $DIACONO])
+                                                            </div>
+                                                     </td>
                                                     <td>{{ $DIACONO->Rut }}</td>
                                                     <td>{{ $DIACONO->Nombre }}</td>
                                                     <td>{{ $DIACONO->EstadoVigencia }}</td>
                                                     <td>{{ $DIACONO->FechaNacimiento }}</td>
-                                                    <td>{{ $DIACONO->FechaOrdenacion }}</td>
-                                                    <td>{{ $DIACONO->LugarOrdenacion }}</td>
-                                                    <td>{{ $DIACONO->NombreObispoOrdeno }}</td>
-                                                    <td>{{ $DIACONO->ProfesionOficio }}</td>
-                                                    <td>{{ $DIACONO->ParroquiaAsignada }}</td>
-                                                    <td>{{ $DIACONO->VicariaAmbientalAsignada }}</td>
                                                     <td>{{ $DIACONO->DireccionParticular }}</td>
-                                                    <td>{{ $DIACONO->TelefonoCelular }}</td>
-                                                    <td>{{ $DIACONO->TelefonoFijo }}</td>
                                                     <td>{{ $DIACONO->CorreoElectronico }}</td>
-                                                    <td>{{ $DIACONO->IndicadorDefuncion }}</td>
-                                                    <td>{{ $DIACONO->FechaDefuncion }}</td>
-                                                    <td>{{ $DIACONO->EstadoCivil }}</td>
-                                                    <td>{{ $DIACONO->NombreEsposa }}</td>
-                                                    <td>{{ $DIACONO->RutEsposa }}</td>
-                                                    <td>{{ $DIACONO->FechaNacimientoEsposa }}</td>
-                                                    <td>{{ $DIACONO->FechaMatrimonio }}</td>
-                                                    <td>{{ $DIACONO->FechaDefuncionEsposa }}</td>
+                                                    <td>{{ $DIACONO->IndicadorDefuncion == 0 ? 'Vivo' : 'Fallecido' }}</td>
 
+                                                    <td>
+
+                                                        <a data-bs-toggle="modal" data-bs-target="#editDiaconoModal{{ $DIACONO->id }}" class="btn btn-primary btn-icon-split">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-flag"></i>
+                                                            </span>
+                                                            <span class="text">Editar</span>
+                                                        </a>
+
+                                                        <div class="modal fade" id="editDiaconoModal{{ $DIACONO->id }}" tabindex="-1" role="dialog" aria-labelledby="editDiaconoModalLabel{{ $DIACONO->id }}" aria-hidden="true">
+                                                            @include('diaconos.edit', ['diacono' => $DIACONO])
+                                                        </div> 
+                                                    </td>
                                                     <td>
                                                         <form method="post" action="{{ route('diaconos.destroy', $DIACONO->id) }}">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-danger btn-circle btn-sm" type="submit"> <i class="fas fa-trash"></i></button>
+                                                            <button type="submit" class="btn btn-danger btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </span>
+                                                                <span class="text">Borrar</span>
+                                                            </button>
+                                                        </form>
 
-                                                            <a href="{{ route('diaconos.edit', $DIACONO->id) }}" class="btn btn-info btn-circle btn-sm">
-                                                                <i class="fas fa-info-circle"></i>
-                                                            </a>
-
-                                                    </form>   
                                                     </td>
+ 
+
                                                 </tr>
                                             @endforeach                                            
                                         </tbody>
@@ -291,8 +314,8 @@
                     <!-- /.container-fluid -->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -306,5 +329,9 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
+
+
 </body>
 </html>
