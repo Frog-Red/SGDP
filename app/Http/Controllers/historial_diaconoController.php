@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // app/Http/Controllers/historial_diaconoController.php
 
 use App\Models\historial_diacono;
+use App\Models\Diacono; // Import the Diacono model
+use App\Models\tipo_evento; // Import the tipo_evento model
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +20,9 @@ class historial_diaconoController extends Controller
 
     public function create()
     {
-        return view('historial_diacono.create');
+        $diaconos = Diacono::all();
+        $tiposEvento = tipo_evento::all();
+        return view('historial_diacono.create', compact('diaconos', 'tiposEvento'));
     }
 
     public function store(Request $request)
@@ -35,8 +39,10 @@ class historial_diaconoController extends Controller
 
     public function edit($id)
     {
+        $diaconos = Diacono::all();
+        $tiposEvento = tipo_evento::all();
         $historial_diacono = historial_diacono::find($id);
-        return view('historial_diacono.edit', compact('historial_diacono'));
+        return view('historial_diacono.edit', compact('historial_diacono', 'diaconos', 'tiposEvento'));
     }
 
     public function update(Request $request, $id)

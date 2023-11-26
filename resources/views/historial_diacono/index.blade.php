@@ -1,59 +1,77 @@
-<!-- resources/views/welcome.blade.php -->
+@include('headers.historial_diacono')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-</head>
-<body>
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800">Historial Diaconos</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
 
-    <h1>Historial de diaconos</h1>
+                    <button type="button" class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#createhistorial_diaconoModal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span> <span class="text">Añadir Evento</span>
+                    </button>
 
-    <a href="{{ route('historial_diacono.create') }}">
-        <button>Add Historial</button>
-    </a>
+                </div>
+                <div class="modal fade" id="createhistorial_diaconoModal" tabindex="-1" role="dialog" aria-labelledby="createhistorial_diaconolLabel" aria-hidden="true">
+                    @include('historial_diacono.create')
+                </div>
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-gray-800" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                <th>Rut Diacono</th>
+                                <th>Codigo</th>
+                                <th>Codigo del Evento</th>
+                                <th>Fecha del Evento</th>
+                                <th>Comentarios</th>
+                                <th>Codigo de Usuario</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th> <!-- Add a new column for actions -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($historial_diacono as $HISTORIAL_DIACONO)
+                                <tr>
+                                    <td>{{ $HISTORIAL_DIACONO->RutDiacono }}</td>
+                                    <td>{{ $HISTORIAL_DIACONO->NumeroSecuenciaEvento }}</td>
+                                    <td>{{ $HISTORIAL_DIACONO->CodigoTipoEvento }}</td>
+                                    <td>{{ $HISTORIAL_DIACONO->FechaEvento }}</td>
+                                    <td>{{ $HISTORIAL_DIACONO->ComentariosEvento}}</td>
+                                    <td>{{ $HISTORIAL_DIACONO->CodigoUsuarioRegistro }}</td>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Rut de Diacono</th>
-                <th>Numero de Secuencia del Evento</th>
-                <th>Codigo del Evento</th>
-                <th>Fecha del Evento</th>
-                <th>Comentarios</th>
-                <th>Codigo de Usuario Registro</th>
-                <th>Actions</th> <!-- Add a new column for actions -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($historial_diacono as $HISTORIAL_DIACONO)
-                <tr>
-                    <td>{{ $HISTORIAL_DIACONO->RutDiacono }}</td>
-                    <td>{{ $HISTORIAL_DIACONO->NumeroSecuenciaEvento }}</td>
-                    <td>{{ $HISTORIAL_DIACONO->CodigoTipoEvento }}</td>
-                    <td>{{ $HISTORIAL_DIACONO->FechaEvento }}</td>
-                    <td>{{ $HISTORIAL_DIACONO->ComentariosEvento}}</td>
-                    <td>{{ $HISTORIAL_DIACONO->CodigoUsuarioRegistro }}</td>
+                                    <td>
 
+                                        <a data-bs-toggle="modal" data-bs-target="#edithistorial_diaconoModal{{ $HISTORIAL_DIACONO->id }}" class="btn btn-primary btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-flag"></i>
+                                            </span>
+                                            <span class="text">Editar</span>
+                                        </a>
 
-                    <td>
-                        <form method="post" action="{{ route('historial_diacono.destroy', $HISTORIAL_DIACONO->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                            
-                        <a href="{{ route('historial_diacono.edit', $HISTORIAL_DIACONO->id) }}">
-                            <button>Edit</button>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                                        <div class="modal fade" id="edithistorial_diaconoModal{{ $HISTORIAL_DIACONO->id }}" tabindex="-1" role="dialog" aria-labelledby="editDiaconoModalLabel{{ $HISTORIAL_DIACONO->id }}" aria-hidden="true">
+                                            @include('historial_diacono.edit', ['historial_diacono' => $HISTORIAL_DIACONO])
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <form method="post" action="{{ route('historial_diacono.destroy', $HISTORIAL_DIACONO->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Borrar</span>
+                                            </button>
+                                        </form>
 
-</body>
-</html>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @include('footer.footer')

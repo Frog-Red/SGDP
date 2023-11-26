@@ -17,6 +17,11 @@ class rol_diacono extends Model
         'CodigoUsuarioRegistro',
     ];
 
+    public function rolPastoral()
+    {
+        return $this->belongsTo(rol_pastoral::class, 'CodigoRol', 'NombreRol');
+    }
+
     protected $table = 'rol_diacono';
 
     protected $primaryKey = 'id';

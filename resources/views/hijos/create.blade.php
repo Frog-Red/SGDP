@@ -1,50 +1,82 @@
 <!-- resources/views/hijos/create.blade.php -->
+@php
+    $diaconos = \App\Models\Diacono::all(); // Replace with your actual namespace and model
+@endphp
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Hijo</title>
-</head>
-<body>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createHijoModalLabel">Añadir Hijo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-    <h1>Create Hijo</h1>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                <form method="post" action="{{ route('hijos.store') }}">
+                    @csrf
+                        
+                    <label for="RutDiáconoPadre" class="form-label">Rut del Padre Diácono:</label>
+                    <select class="form-control"id="RutDiáconoPadre" name="RutDiáconoPadre">
+                        <option value="">Selecciona un Rut</option>
+                        @foreach($diaconos as $diacono)
+                            <option value="{{ $diacono->Rut }}">{{ $diacono->Rut }} - {{ $diacono->Nombre }}</option>
+                        @endforeach
+                    </select>
+
+                    <hr>
+
+                    <label for="RutHijo">Rut Hijo:</label>
+                    <input class="form-control"type="text" name="RutHijo" value="{{ old('RutHijo') }}" required>
+
+                    <hr>
+
+                    <label>Sexo Hijo: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="SexoHijo" id="Masculino" value="Masculino" {{ old('SexoHijo') === 'Masculino' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="Masculino">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="SexoHijo" id="Femenino" value="Femenino" {{ old('SexoHijo') === 'Femenino' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="Femenino">Femenino</label>
+                    </div>
+
+                    <hr>
+
+                    <label for="NombreHijo">Nombre Hijo:</label>
+                    <input class="form-control"type="text" name="NombreHijo" value="{{ old('NombreHijo') }}" required>
+
+                    <hr>
+
+                    <label for="FechaNacimientoHijo">Fecha de Nacimiento Hijo:</label>
+                    <input class="form-control"type="date" name="FechaNacimientoHijo" value="{{ old('FechaNacimientoHijo') }}" required>
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+
+
+                </form>
+            </div>
         </div>
-    @endif
+    </div>
 
-    <form method="post" action="{{ route('hijos.store') }}">
-        @csrf
-
-        <label for="RutDiáconoPadre" class="form-label">Rut del Padre Diácono:</label>
-        <select class="form-select" id="RutDiáconoPadre" name="RutDiáconoPadre">
-            <option value="">Selecciona un Rut</option>
-            @foreach($diaconos as $diacono)
-                <option value="{{ $diacono->Rut }}">{{ $diacono->Rut }} - {{ $diacono->Nombre }}</option>
-            @endforeach
-        </select>
-        <label for="RutHijo">Rut Hijo:</label>
-        <input type="text" name="RutHijo" value="{{ old('RutHijo') }}" required>
-
-        <label for="SexoHijo">Sexo Hijo:</label>
-        <input type="text" name="SexoHijo" value="{{ old('SexoHijo') }}" required>
-
-        <label for="NombreHijo">Nombre Hijo:</label>
-        <input type="text" name="NombreHijo" value="{{ old('NombreHijo') }}" required>
-
-        <label for="FechaNacimientoHijo">Fecha de Nacimiento Hijo:</label>
-        <input type="date" name="FechaNacimientoHijo" value="{{ old('FechaNacimientoHijo') }}" required>
-
-        <button type="submit">Submit</button>
-    </form>
-
-</body>
-</html>
+<script>
+    // Apply Select2 to the RutDiáconoPadre element
+    $(document).ready(function () {
+        $('#RutDiáconoPadre').select2({
+            placeholder: 'Selecciona un Rut',
+            allowClear: true,
+        });
+    });
+</script>

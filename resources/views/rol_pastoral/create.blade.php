@@ -1,15 +1,20 @@
-<!-- resources/views/rol_pastoral/create.blade.php -->
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="createrol_pastoralLabel">Crear Rol</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Rol Pastoral</title>
-</head>
-<body>
-
-    <h1>Create Rol Pastoral</h1>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -25,16 +30,21 @@
         @csrf
 
         <label for="CodigoRolPastoral">Codigo Rol Pastoral:</label>
-        <input type="text" name="CodigoRolPastoral" value="{{ old('CodigoRolPastoral') }}" required>
+        <input class="form-control"type="text" name="CodigoRolPastoral" value="{{ old('CodigoRolPastoral') }}" required>
 
         <label for="NombreRol">Nombre Rol:</label>
-        <input type="text" name="NombreRol" value="{{ old('NombreRol') }}" required>
+        <input class="form-control"type="text" name="NombreRol" value="{{ old('NombreRol') }}" required>
 
         <label for="DescripcionRol">Descripcion Rol:</label>
-        <input type="text" name="DescripcionRol" value="{{ old('DescripcionRol') }}" required>
+        <input class="form-control"type="text" name="DescripcionRol" value="{{ old('DescripcionRol') }}" required>
 
-        <button type="submit">Submit</button>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+
+
     </form>
-
-</body>
-</html>
+</div>
+</div>
+</div>

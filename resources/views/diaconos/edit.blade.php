@@ -1,9 +1,10 @@
+@php
+    $parroquias = \App\Models\Parroquia::all(); // Replace with your actual namespace and model
+    $vicaria_ambiental =  \App\Models\vicaria_ambiental::all(); 
+@endphp
 <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h1 class="modal-title" id="editDiaconoModalLabel"></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+
         <div class="modal-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -35,7 +36,12 @@
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="estadoVigencia" class="form-label">Estado de vigencia:</label>
-                            <input type="text" class="form-control" id="estadoVigencia" name="estadoVigencia" value="{{ $diacono->EstadoVigencia }}" required" required>
+                            <select class="form-control" id="estadoVigencia" name="estadoVigencia" onchange="toggleestadoVigenciaOptions()">
+                                <option value="Activo" @if($diacono->estadoVigencia == 'Activo') selected @endif>Activo</option>
+                                <option value="Suspendido" @if($diacono->estadoVigencia == 'Suspendido') selected @endif>Suspendido</option>
+                                <option value="Dimitido" @if($diacono->estadoVigencia == 'Dimitido') selected @endif>Dimitido</option>
+                                <option value="Fallecido" @if($diacono->estadoVigencia == 'Fallecido') selected @endif>Fallecido</option>
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
@@ -86,18 +92,29 @@
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
-                            <label for="nombreObispoOrdeno" class="form-label">nombreObispoOrdeno</label>
+                            <label for="nombreObispoOrdeno" class="form-label">Nombre del Obispo que Ordeno</label>
                             <input type="text" class="form-control" id="nombreObispoOrdeno" name="nombreObispoOrdeno" value="{{ $diacono->NombreObispoOrdeno }}">
                         </div>
                         <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
                             <label for="parroquiaAsignada" class="form-label">Parroquia asignada:</label>
-                            <input type="text" class="form-control" id="parroquiaAsignada" name="parroquiaAsignada" value="{{ $diacono->ParroquiaAsignada }}">
+                            <select class="form-control" id="parroquiaAsignada" name="parroquiaAsignada" required>
+                                @foreach($parroquias as $parroquia)
+                                    <option value="{{ $parroquia->NombreParroquia }}" {{ $diacono->ParroquiaAsignada == $parroquia->NombreParroquia ? 'selected' : '' }}>
+                                        {{ $parroquia->NombreParroquia }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="vicariaAmbientalAsignada" class="form-label">Vicaría Ambiental</label>
-                            <input type="text" class="form-control" id="vicariaAmbientalAsignada" name="vicariaAmbientalAsignada" value="{{ $diacono->VicariaAmbientalAsignada }}">
+                            <select class="form-control" id="vicariaAmbientalAsignada" name="vicariaAmbientalAsignada">
+                                @foreach($vicaria_ambiental as $VICARIA)
+                                <option value="{{ $VICARIA->NombreVicariaAmbiental }}" {{ $diacono->VicariaAmbientalAsignada == $VICARIA->NombreVicariaAmbiental ? 'selected' : '' }}>
+                                    {{ $VICARIA->NombreVicariaAmbiental }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <hr>
@@ -137,6 +154,8 @@
                                 <option value="viudo" @if($diacono->EstadoCivil == 'viudo') selected @endif>Viudo</option>
                             </select>
                         </div>
+
+                        @if($diacono->EstadoCivil == 'casado' || $diacono->EstadoCivil == 'viudo')
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="nombreEsposa" class="form-label">nombreEsposa:</label>
@@ -157,16 +176,23 @@
                             <label for="fechaMatrimonio" class="form-label">fechaMatrimonio</label>
                             <input type="date" class="form-control" id="fechaMatrimonio" name="fechaMatrimonio" value="{{ $diacono->FechaMatrimonio }}">
                         </div>
+                        @endif
+
+                        @if($diacono->EstadoCivil == 'viudo')
+
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="fechaDefuncionEsposa" class="form-label">fechaDefuncionEsposa</label>
                             <input type="date" class="form-control" id="fechaDefuncionEsposa" name="fechaDefuncionEsposa" value="{{ $diacono->FechaDefuncionEsposa }}">
                         </div>
+                        @endif
                     </div>
                 </div>
                 <!-- Repeat similar structures for the remaining sections -->
-                <hr>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Actualizar Diacono</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </form>
         </div>
     </div>

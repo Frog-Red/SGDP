@@ -36,8 +36,9 @@ class HijosController extends Controller
 
     public function edit($id)
     {
+        $diaconos = Diacono::all();
         $hijo = Hijos::find($id);
-        return view('hijos.edit', compact('hijo'));
+        return view('hijos.edit', compact('hijo','diaconos'));
     }
 
     public function update(Request $request, $id)

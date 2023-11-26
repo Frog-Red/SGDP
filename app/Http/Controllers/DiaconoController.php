@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // app/Http/Controllers/DiaconoController.php
 
 use App\Models\Diacono;
+use App\Models\Parroquia;
+use App\Models\vicaria_ambiental;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,9 +19,13 @@ class DiaconoController extends Controller
     }
 
     public function create()
-    {
-        return view('diaconos.create');
+    {      
+        $vicaria_ambiental = vicaria_ambiental::all();
+        $parroquias = Parroquia::all();
+        return view('diaconos.create', compact('parroquias','vicaria_ambiental'));
     }
+    
+    
 
     public function store(Request $request)
     {
@@ -68,4 +74,5 @@ class DiaconoController extends Controller
         $diacono->delete();
         return redirect()->route('diaconos.index')->with('success', 'Diacono deleted successfully');
     }
+    
 }

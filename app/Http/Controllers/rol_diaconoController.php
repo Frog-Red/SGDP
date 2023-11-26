@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Models\rol_diacono;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Diacono;
+use App\Models\rol_pastoral;
 
 class rol_diaconoController extends Controller
 {
@@ -18,7 +20,9 @@ class rol_diaconoController extends Controller
 
     public function create()
     {
-        return view('rol_diacono.create');
+        $diaconos = Diacono::all();
+        $rol_pastoral = rol_pastoral::all();
+        return view('rol_diacono.create', compact('diaconos', 'rol_pastoral'));
     }
 
     public function store(Request $request)
@@ -35,8 +39,10 @@ class rol_diaconoController extends Controller
 
     public function edit($id)
     {
+        $diaconos = Diacono::all();
+        $rol_pastoral = rol_pastoral::all();
         $rol_diacono = rol_diacono::find($id);
-        return view('rol_diacono.edit', compact('rol_diacono'));
+        return view('rol_diacono.edit', compact('rol_diacono', 'diaconos', 'rol_pastoral'));
     }
 
     public function update(Request $request, $id)

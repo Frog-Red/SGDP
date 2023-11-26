@@ -17,7 +17,11 @@ class rol_pastoral extends Model
     protected $table = 'rol_pastoral';
 
     protected $primaryKey = 'id';
-
+    
+    public function rolDiaconos()
+    {
+        return $this->hasMany(rol_diacono::class, 'CodigoRol', 'NombreRol');
+    }
     public $timestamps = true;
 
     // Define relationships if any
