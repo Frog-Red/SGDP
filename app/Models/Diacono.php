@@ -43,5 +43,13 @@ class Diacono extends Model
     {
         return $this->hasMany(Hijo::class, 'RutDiáconoPadre', 'Rut');
     }
+    public function roles()
+    {
+        return $this->hasMany(rol_diacono::class, 'RutDiacono', 'Rut');
+    }
+    public function historial_diacono()
+    {
+        return $this->hasMany(historial_diacono::class, 'RutDiacono', 'Rut');
+    }
     // Additional model configurations or relationships can be added here
 }

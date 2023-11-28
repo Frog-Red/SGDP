@@ -1,12 +1,11 @@
-<!-- resources/views/welcome.blade.php -->
 @include ('Gradients.gradients')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Hijos</title>
+    <title>Administracion de usuarios</title>
    <!-- Custom fonts for this template -->
    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
    <link
@@ -19,8 +18,23 @@
    <!-- Custom styles for this page -->
    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+   <style>
+    body {
+        background-image: url('{{ asset('img/bg.jpg') }}');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for background opacity */
+    }
+    .logo {
+    margin: 3% auto 0; /* Added margin to the top, auto for centering horizontally */
+    display: block; /* Ensure the logo is centered */
+}
+</style>
 </head>
-<body class="page2">
+<body class="page10">
  <!-- Page Wrapper -->
  <div id="wrapper">
 
@@ -29,6 +43,8 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('welcome') }}">
+            <div class="sidebar-brand-icon rotate-n-15">
+            </div>
             <div class="sidebar-brand-text mx-3">Iglesia de santiago </div>
         </a>
 
@@ -43,15 +59,13 @@
             Iglesia de santiago
         </div>
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('welcome') }}">
+        <li class="nav-item ">
+            <a class="nav-link " href="{{ route('welcome') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Inicio</span></a>
         </li>
-
-
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">  
+        <hr class="sidebar-divider d-none d-md-block">    
         
         @if(auth()->check() && auth()->user()->hasAnyRole(3))
         <div class="sidebar-heading">
@@ -59,16 +73,18 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item ">
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('consultas') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Consultas</span></a>
         </li>
         <hr class="sidebar-divider d-none d-md-block">
         @endif
-        
-        @if(auth()->check() && auth()->user()->hasAnyRole(2))
 
+
+
+
+        @if(auth()->check() && auth()->user()->hasAnyRole(2))
         <div class="sidebar-heading">
             Diaconos
         </div>
@@ -79,7 +95,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Diaconos</span></a>
         </li>
-        <li class="nav-item  active">
+        <li class="nav-item ">
             <a class="nav-link" href="{{ route('hijos.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Hijos</span></a>
@@ -94,11 +110,11 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Roles de Diaconos</span></a>
         </li>        
-
-        
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         @endif
+        
+
         @if(auth()->check() && auth()->user()->hasAnyRole(1))
         <div class="sidebar-heading">
            Iglesia
@@ -139,10 +155,11 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Vicaria Zonal</span></a>
         </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         @endif
+
+
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -157,4 +174,5 @@
         <!-- Main Content -->
         <div id="content">
 
+            <!-- Topbar -->
             @include ('headers.topbar')

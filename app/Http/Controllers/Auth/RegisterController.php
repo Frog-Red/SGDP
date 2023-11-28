@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\roles;
 
 class RegisterController extends Controller
 {
@@ -64,10 +65,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Check if the registration is self-registration
+        if (request()->is('register')) {
+            // Assign the default role (assuming role_id 3 is the default role)
+            $role = roles::find(3);
+            $user->roles()->attach($role);
+        }
+
+        return $user;
     }
 }

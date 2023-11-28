@@ -69,16 +69,22 @@
                                                         </div> 
                                                     </td>
                                                     <td>
-                                                        <form method="post" action="{{ route('diaconos.destroy', $DIACONO->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-icon-split">
-                                                                <span class="icon text-white-50">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </span>
-                                                                <span class="text">Borrar</span>
-                                                            </button>
-                                                        </form>
+                                                        <a href="{{ route('diaconos.destroy', $DIACONO->id) }}" 
+                                                            onclick="event.preventDefault(); if(confirm('¿Estás seguro de que deseas borrar este registro?')) { document.getElementById('delete-form-{{ $DIACONO->id }}').submit(); }"
+                                                            class="btn btn-danger btn-icon-split">
+                                                             <span class="icon text-white-50">
+                                                                 <i class="fas fa-trash"></i>
+                                                             </span>
+                                                             <span class="text">Borrar</span>
+                                                         </a>
+                                                         
+                                                         <form id="delete-form-{{ $DIACONO->id }}" 
+                                                               action="{{ route('diaconos.destroy', $DIACONO->id) }}" 
+                                                               method="post" 
+                                                               style="display: none;">
+                                                             @csrf
+                                                             @method('DELETE')
+                                                         </form>
 
                                                     </td>
  

@@ -20,18 +20,38 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        body {
+            background-image: url('{{ asset('img/bg.jpg') }}');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for background opacity */
+        }
+        .logo {
+        margin: 3% auto 0; /* Added margin to the top, auto for centering horizontally */
+        display: block; /* Ensure the logo is centered */
+    }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
+<body >
+    <div class="text-center">
+        <img src="{{ asset('img/logo.png') }}" class=logo>
+    </div>
 
     <div class="container">
+        <div class="row justify-content-center">
+
+        <div class="col-xl-7 col-lg-12 col-md-9">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea tu cuenta!</h1>
@@ -77,9 +97,11 @@
                                 <a class="small" href="{{ route('welcome') }}">Ya tiene una cuenta? Inicie sesion!</a>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </div>

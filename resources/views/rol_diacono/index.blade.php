@@ -57,16 +57,20 @@
                                             </div> 
                                         </td>
                                         <td>
-                                            <form method="post" action="{{ route('rol_diacono.destroy', $ROL_DIACONO->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                            <a href="#" onclick="event.preventDefault(); if(confirm('¿Estás seguro de que deseas borrar este registro?')) { document.getElementById('deleteRolDiaconoForm{{ $ROL_DIACONO->id }}').submit(); }">
+                                                <button class="btn btn-danger btn-icon-split">
                                                     <span class="icon text-white-50">
                                                         <i class="fas fa-trash"></i>
                                                     </span>
                                                     <span class="text">Borrar</span>
                                                 </button>
+                                            </a>
+                                            
+                                            <form id="deleteRolDiaconoForm{{ $ROL_DIACONO->id }}" method="post" action="{{ route('rol_diacono.destroy', $ROL_DIACONO->id) }}" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
                                             </form>
+                                            
 
                                         </td>
                                     </tr>

@@ -45,8 +45,8 @@ class DiaconoController extends Controller
 
     public function show($id)
     {
-        $diacono = Diacono::find($id);
-        return view('diaconos.show', compact('diacono'));
+        $diaconos = Diacono::find($id);
+        return view('diaconos.index', compact('diaconos'));
     }
 
     public function edit($id)
@@ -73,6 +73,11 @@ class DiaconoController extends Controller
         $diacono = Diacono::find($id);
         $diacono->delete();
         return redirect()->route('diaconos.index')->with('success', 'Diacono deleted successfully');
+    }
+    public function consultas()
+    {
+        $diaconos = Diacono::all();
+        return view('consultas', compact('diaconos'));
     }
     
 }

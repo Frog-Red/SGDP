@@ -29,15 +29,15 @@
 }
 
 .page8 {
-    background: linear-gradient(to right, #8b0f35, #000000);
+    background: linear-gradient(to right, #179e6d, #000000);
 }
 
 .page9 {
-    background: linear-gradient(to right, #8b0f35, #000000);
+    background: linear-gradient(to right, #179e6d, #000000);
 }
 
 .page10 {
-    background: linear-gradient(to right, #671497, #000000);
+    background: linear-gradient(to right, #9e1f49, #000000);
 }
 
 

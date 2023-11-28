@@ -51,16 +51,20 @@
                                             </div> 
                                         </td>
                                         <td>
-                                            <form method="post" action="{{ route('tipo_evento.destroy', $TIPO_EVENTO->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                            <a href="#" onclick="event.preventDefault(); if(confirm('¿Estás seguro de que deseas borrar este registro?')) { document.getElementById('deleteTipoEventoForm{{ $TIPO_EVENTO->id }}').submit(); }">
+                                                <button class="btn btn-danger btn-icon-split">
                                                     <span class="icon text-white-50">
                                                         <i class="fas fa-trash"></i>
                                                     </span>
                                                     <span class="text">Borrar</span>
                                                 </button>
+                                            </a>
+                                            
+                                            <form id="deleteTipoEventoForm{{ $TIPO_EVENTO->id }}" method="post" action="{{ route('tipo_evento.destroy', $TIPO_EVENTO->id) }}" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
                                             </form>
+                                            
 
                                         </td>
                                     </tr>

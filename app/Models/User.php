@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'roles_id', // Add the role_id field
     ];
 
     /**
@@ -40,4 +41,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Define the relationship with the role
+    public function roles()
+    {
+        return $this->belongsToMany(roles::class, 'role_user', 'user_id', 'role_id');
+    }
+
+    /**
+     * Check if the user has any of the specified roles.
+     *
+     * @param array ...$roleNames
+     * @return bool
+     */
+    public function hasAnyRole(...$roleIds)
+    {
+        return $this->roles()->whereIn('roles.id', $roleIds)->exists();
+    }
+
+
+    
 }

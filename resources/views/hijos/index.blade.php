@@ -54,15 +54,18 @@
                                             </div> 
                                         </td>
                                         <td>
-                                            <form method="post" action="{{ route('hijos.destroy', $HIJOS->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                            <a href="#" onclick="event.preventDefault(); if(confirm('¿Estás seguro de que deseas borrar este registro?')) { document.getElementById('deleteHijoForm{{ $HIJOS->id }}').submit(); }">
+                                                <button class="btn btn-danger btn-icon-split">
                                                     <span class="icon text-white-50">
                                                         <i class="fas fa-trash"></i>
                                                     </span>
                                                     <span class="text">Borrar</span>
                                                 </button>
+                                            </a>
+                                            
+                                            <form id="deleteHijoForm{{ $HIJOS->id }}" method="post" action="{{ route('hijos.destroy', $HIJOS->id) }}" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
                                             </form>
 
                                         </td>
