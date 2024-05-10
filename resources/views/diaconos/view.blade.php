@@ -99,7 +99,7 @@
                         <p><strong>Estado Civil:</strong> {{ $diacono->EstadoCivil }}</p>
                     </div>
 
-                    @if($diacono->EstadoCivil == 'casado')
+                    @if($diacono->EstadoCivil == 'casado'||$diacono->EstadoCivil == 'Casado')
 
                     <div class="col-md-4">
                         <p><strong>Nombre Esposa:</strong> {{ $diacono->NombreEsposa }}</p>
@@ -119,7 +119,7 @@
                     @endif
 
         
-                    @if($diacono->EstadoCivil == 'viudo')
+                    @if($diacono->EstadoCivil == 'viudo'||$diacono->EstadoCivil == 'Viudo')
                     <div class="col-md-4">
                         <p><strong>Fecha Defuncion Esposa:</strong> {{ $diacono->FechaDefuncionEsposa }}</p>
                     </div>

@@ -40,6 +40,9 @@
     background: linear-gradient(to right, #9e1f49, #000000);
 }
 
+.page11 {
+    background: linear-gradient(to right,  #ffffffcc, #ffef5cbd);
+}
 
 
     </style>

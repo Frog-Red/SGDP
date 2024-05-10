@@ -147,15 +147,15 @@
                     <h5 class="mb-4"><strong class="text-dark">Informacion Civil</strong></h5>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="estadoCivil" class="form-label">estadoCivil:</label>
+                            <label for="estadoCivil" class="form-label">Estado Civil:</label>
                             <select class="form-control" id="estadoCivil" name="estadoCivil" onchange="toggleEstadoCivilOptions()">
-                                <option value="soltero" @if($diacono->EstadoCivil == 'soltero') selected @endif>Soltero</option>
-                                <option value="casado" @if($diacono->EstadoCivil == 'casado') selected @endif>Casado</option>
-                                <option value="viudo" @if($diacono->EstadoCivil == 'viudo') selected @endif>Viudo</option>
+                                <option value="soltero" @if($diacono->EstadoCivil == 'soltero' || $diacono->EstadoCivil == 'Soltero') selected @endif>Soltero</option>
+                                <option value="casado" @if($diacono->EstadoCivil == 'casado'|| $diacono->EstadoCivil == 'Casado') selected @endif>Casado</option>
+                                <option value="viudo" @if($diacono->EstadoCivil == 'viudo'|| $diacono->EstadoCivil == 'Viudo') selected @endif>Viudo</option>
                             </select>
                         </div>
 
-                        @if($diacono->EstadoCivil == 'casado' || $diacono->EstadoCivil == 'viudo')
+                        @if($diacono->EstadoCivil == 'casado' || $diacono->EstadoCivil == 'viudo'|| $diacono->EstadoCivil == 'Viudo' || $diacono->EstadoCivil == 'Casado')
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="nombreEsposa" class="form-label">nombreEsposa:</label>

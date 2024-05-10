@@ -29,6 +29,9 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('diaconos/carga-masiva', [DiaconoController::class, 'showCargaMasivaForm'])->name('diaconos.cargaMasiva')->middleware('roles:2');
+    Route::post('diaconos/import', [DiaconoController::class, 'import'])->name('diaconos.import')->middleware('roles:2');
+    Route::get('diaconos/download-template', [DiaconoController::class, 'downloadTemplate'])->name('diaconos.downloadTemplate')->middleware('roles:2');
     Route::get('/consultas', [DiaconoController::class, 'consultas'])->name('consultas')->middleware('roles:3');
     Route::resource('diaconos', DiaconoController::class)->middleware('roles:2');
     Route::resource('hijos', HijosController::class)->middleware('roles:2');
@@ -43,8 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/contrasena', 'App\Http\Controllers\UserController@showChangePasswordForm')->name('contrasena');
     Route::post('/contrasena', 'App\Http\Controllers\UserController@changePassword')->name('contrasena.post');
-    
-
+    Route::post('/diaconos/delete-selected', 'DiaconoController@deleteSelected')->name('diaconos.deleteSelected');
+    Route::delete('/selected-diacono',[DiaconoController::class, 'deleteAll'])->name('diacono.delete');
 });
 
 Auth::routes();

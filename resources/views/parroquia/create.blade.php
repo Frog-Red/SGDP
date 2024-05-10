@@ -1,4 +1,8 @@
 
+@php
+$vicaria_zonal =  \App\Models\vicaria_zonal::all(); 
+@endphp
+    
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,8 +40,11 @@
         <input class="form-control"type="email" name="CorreoElectronicoParroquia" value="{{ old('CorreoElectronicoParroquia') }}" required>
 
         <label for="VicariaZonalPertenece">Vicaria Zonal:</label>
-        <input class="form-control"type="text" name="VicariaZonalPertenece" value="{{ old('VicariaZonalPertenece') }}" required>
-
+        <select class="form-control" id="VicariaZonalPertenece" name="VicariaZonalPertenece" required>
+            @foreach($vicaria_zonal as $V)
+                <option value="{{ $V->NombreVicariaZonal }}">{{ $V->NombreVicariaZonal }}</option>
+            @endforeach
+        </select>
         <label for="NombreParroco">Nombre del Parroco:</label>
         <input class="form-control"type="text" name="NombreParroco" value="{{ old('NombreParroco') }}" required>
 

@@ -123,7 +123,7 @@
                     <div class="col-md-3">
                         <!-- Add other fields for Section 1 -->
                         <label for="indicadorDefuncion" class="form-label">Indicador de Defunción:</label>
-                        <select class="form-control" id="IndicadorDefuncion" name="IndicadorDefuncion" onchange="toggleOptions()">
+                        <select class="form-control" id="indicadorDefuncion" name="indicadorDefuncion" onchange="toggleOptions()">
                             <option value="0">Vivo</option>
                             <option value="1">Fallecido</option>
                         </select>
@@ -138,7 +138,7 @@
                 </div>
                 <script>
                     function toggleOptions() {
-                        var indicadorDefuncion = document.getElementById('IndicadorDefuncion');
+                        var indicadorDefuncion = document.getElementById('indicadorDefuncion');
                         var defuncionOptions = document.getElementById('defuncionOptions');
                 
                         if (indicadorDefuncion.value === '1') {
