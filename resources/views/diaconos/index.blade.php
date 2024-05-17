@@ -65,7 +65,7 @@
                                                     <th>Correo Electronico</th>
                                                     <th>Indicador Defuncion</th>            
                                                     <th>Editar</th>
-                                                    <th>Eliminar</th> <!-- Add a new column for actions -->
+                                                    <th>Extra</th> <!-- Add a new column for actions -->
                                                     <th></th>
 
                                             </tr>
@@ -91,19 +91,6 @@
                                                     <td>{{ $DIACONO->IndicadorDefuncion == 0 ? 'Vivo' : 'Fallecido' }}</td>
 
                                                     <td>
-
-                                                        <a data-bs-toggle="modal" data-bs-target="#editDiaconoModal{{ $DIACONO->id }}" class="btn btn-primary btn-icon-split">
-                                                            <span class="icon text-white-50">
-                                                                <i class="fas fa-flag"></i>
-                                                            </span>
-                                                            <span class="text">Editar</span>
-                                                        </a>
-
-                                                        <div class="modal fade" id="editDiaconoModal{{ $DIACONO->id }}" tabindex="-1" role="dialog" aria-labelledby="editDiaconoModalLabel{{ $DIACONO->id }}" aria-hidden="true">
-                                                            @include('diaconos.edit', ['diacono' => $DIACONO])
-                                                        </div> 
-                                                    </td>
-                                                    <td>
                                                         <a href="{{ route('diaconos.destroy', $DIACONO->id) }}" 
                                                             onclick="event.preventDefault(); if(confirm('¿Estás seguro de que deseas borrar este registro?')) { document.getElementById('delete-form-{{ $DIACONO->id }}').submit(); }"
                                                             class="btn btn-danger btn-icon-split">
@@ -122,6 +109,40 @@
                                                          </form>
 
                                                     </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                <li>
+                                                                    <button class="dropdown-item edit-action" data-bs-toggle="modal" data-bs-target="#editDiaconoModal{{ $DIACONO->id }}">
+                                                                        Editar
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item add-hijo-action" data-bs-toggle="modal" data-bs-target="#creatediaconoHijoModal" data-padre-rut="{{ $DIACONO->Rut }}">
+                                                                        Añadir Hijo
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item add-evento-action" data-bs-toggle="modal" data-bs-target="#createeventoModal" data-diaconorut="{{ $DIACONO->Rut }}">
+                                                                        Añadir evento
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item add-rol-action" data-bs-toggle="modal" data-bs-target="#createroldiaconoModal" data-diaconorut="{{ $DIACONO->Rut }}">
+                                                                        Añadir Rol
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="modal fade" id="editDiaconoModal{{ $DIACONO->id }}" tabindex="-1" role="dialog" aria-labelledby="editDiaconoModalLabel{{ $DIACONO->id }}" aria-hidden="true">
+                                                            @include('diaconos.edit', ['diacono' => $DIACONO])
+                                                        </div> 
+                                                    </td>
+                                                    
+                                                    
                                                     <td><input type="checkbox" name ="ids" class="checkbox_ids" id ="" value="{{ $DIACONO->id }}"></td>
 
 
@@ -176,7 +197,19 @@
                             });
                         });
                     </script>
-                    
+
+                <div class="modal fade" id="creatediaconoHijoModal" tabindex="-1" role="dialog" aria-labelledby="creatediaconoHijoModalLabel" aria-hidden="true">
+                    @include('diaconos.createhijo')
+                </div>
+
+                <div class="modal fade" id="createeventoModal" tabindex="-1" role="dialog" aria-labelledby="createeventoModalLabel" aria-hidden="true">
+                    @include('diaconos.createevento')        
+                </div>
+
+                <div class="modal fade" id="createroldiaconoModal" tabindex="-1" role="dialog" aria-labelledby="createroldiaconoModalLabel" aria-hidden="true">
+                    @include('diaconos.createroldiacono')        
+                </div>
+
 
 @include('footer.footer')
 

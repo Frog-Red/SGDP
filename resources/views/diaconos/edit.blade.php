@@ -37,10 +37,10 @@
                             <!-- Add other fields for Section 1 -->
                             <label for="estadoVigencia" class="form-label">Estado de vigencia:</label>
                             <select class="form-control" id="estadoVigencia" name="estadoVigencia" onchange="toggleestadoVigenciaOptions()">
-                                <option value="Activo" @if($diacono->estadoVigencia == 'Activo') selected @endif>Activo</option>
-                                <option value="Suspendido" @if($diacono->estadoVigencia == 'Suspendido') selected @endif>Suspendido</option>
-                                <option value="Dimitido" @if($diacono->estadoVigencia == 'Dimitido') selected @endif>Dimitido</option>
-                                <option value="Fallecido" @if($diacono->estadoVigencia == 'Fallecido') selected @endif>Fallecido</option>
+                                <option value="Activo" @if($diacono->EstadoVigencia == 'Activo') selected @endif>Activo</option>
+                                <option value="Suspendido" @if($diacono->EstadoVigencia == 'Suspendido') selected @endif>Suspendido</option>
+                                <option value="Dimitido" @if($diacono->EstadoVigencia == 'Dimitido') selected @endif>Dimitido</option>
+                                <option value="Fallecido" @if($diacono->EstadoVigencia == 'Fallecido') selected @endif>Fallecido</option>
                             </select>
                         </div>
                         <div class="col-md-3">

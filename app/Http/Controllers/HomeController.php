@@ -44,7 +44,6 @@ class HomeController extends Controller
                 $cumpleanos->year = $hoy->year;
                 if ($cumpleanos->lt($hoy)) {
                     $cumpleanos->year = $hoy->year + 1;
-                    $nombrecumpleanero = $diacono->Nombre;
                 }
                 if (!$proximoCumpleanos || $cumpleanos->lt($proximoCumpleanos)) {
                     $proximoCumpleanos = $cumpleanos;

@@ -146,7 +146,7 @@ class DiaconoController extends Controller
             $isFirstRow = true; // Variable para controlar la primera fila
 
             // Recorre las filas del archivo Excel y procesa los datos
-            foreach ($sheet->getRowIterator() as $row) {
+            foreach ($sheet->getRowIterator() as $rowNumber => $row) {
                 // Ignora la primera fila que contiene los encabezados
                 if ($isFirstRow) {
                     $isFirstRow = false; // Marca que ya se procesó la primera fila
@@ -192,10 +192,10 @@ class DiaconoController extends Controller
             return redirect()->route('diaconos.index')->with('success', 'Datos de diáconos importados correctamente.');
         } catch (QueryException $e) {
             // Captura excepción de QueryException (error de consulta SQL)
-            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel: ' . $e->getMessage());
+            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
         } catch (Exception $e) {
             // Captura cualquier otra excepción
-            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel: ' . $e->getMessage());
+            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
         }
     }
 
