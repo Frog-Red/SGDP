@@ -31,11 +31,13 @@ class HomeController extends Controller
         // Obtener todos los diáconos
         $diaconos = Diacono::all();
         
-        // Calcular el próximo cumpleaños más cercano
-        $nombrecumpleanero = null;
-        $proximoCumpleanos = null;
-        $cumpleanerosHoy = collect(); // Para almacenar los cumpleañeros de hoy
-        
+        $nombrecumpleanero = []; // Cambiado a array para almacenar múltiples nombres
+        $proximoCumpleanos = []; // Cambiado a array para almacenar múltiples fechas de cumpleaños
+        $cumpleanerosHoy = []; // Cambiado a array para almacenar múltiples cumpleañeros de hoy
+        $nombreOrdenacion = []; // Cambiado a array para almacenar múltiples nombres de ordenación
+        $proximoOrdenacion = []; // Cambiado a array para almacenar múltiples fechas de ordenación próxima
+        $OrdenacionHoy = []; // Cambiado a array para almacenar múltiples ordenaciones de hoy
+
         $hoy = Carbon::today();
         foreach ($diaconos as $diacono) {
             // Verificar si el diácono está fallecido
@@ -45,16 +47,45 @@ class HomeController extends Controller
                 if ($cumpleanos->lt($hoy)) {
                     $cumpleanos->year = $hoy->year + 1;
                 }
-                if (!$proximoCumpleanos || $cumpleanos->lt($proximoCumpleanos)) {
-                    $proximoCumpleanos = $cumpleanos;
-                    $nombrecumpleanero = $diacono->Nombre;
+                if (empty($proximoCumpleanos) || $cumpleanos->lt(min($proximoCumpleanos))) {
+                    $proximoCumpleanos = [$cumpleanos]; // Reinicia el array con una nueva fecha si es más próxima
+                    $nombrecumpleanero = [$diacono->Nombre]; // Reinicia el array con un nuevo nombre
+                } elseif ($cumpleanos->eq(min($proximoCumpleanos))) {
+                    $proximoCumpleanos[] = $cumpleanos; // Añade la fecha al array existente si es igualmente próxima
+                    $nombrecumpleanero[] = $diacono->Nombre; // Añade el nombre al array existente
+                }
+                // Verificar si es el cumpleaños de hoy y añadir al array correspondiente
+                if ($cumpleanos->isToday()) {
+                    $cumpleanerosHoy[] = $diacono->Nombre;
                 }
             }
-        } 
+        }
+
+        foreach ($diaconos as $diacono) {
+            // Verificar si el diácono está fallecido
+            if ($diacono->IndicadorDefuncion != 1) {
+                $ordenacion = Carbon::createFromFormat('Y-m-d', $diacono->FechaOrdenacion);
+                $ordenacion->year = $hoy->year;
+                if ($ordenacion->lt($hoy)) {
+                    $ordenacion->year = $hoy->year + 1;
+                }
+                if (empty($proximoOrdenacion) || $ordenacion->lt(min($proximoOrdenacion))) {
+                    $proximoOrdenacion = [$ordenacion]; // Reinicia el array con una nueva fecha si es más próxima
+                    $nombreOrdenacion = [$diacono->Nombre]; // Reinicia el array con un nuevo nombre
+                } elseif ($ordenacion->eq(min($proximoOrdenacion))) {
+                    $proximoOrdenacion[] = $ordenacion; // Añade la fecha al array existente si es igualmente próxima
+                    $nombreOrdenacion[] = $diacono->Nombre; // Añade el nombre al array existente
+                }
+                // Verificar si es la ordenación de hoy y añadir al array correspondiente
+                if ($ordenacion->isToday()) {
+                    $OrdenacionHoy[] = $diacono->Nombre;
+                }
+            }
+        }
+
     
         // Obtener el total de diáconos en el sistema
         $totalDiaconos = Diacono::count();
-        $totalParroquia = Parroquia::count();
 
 
         // Ruta del archivo Excel
@@ -106,8 +137,11 @@ class HomeController extends Controller
             'proximoCumpleanos' => $proximoCumpleanos, 
             'nombrecumpleanero' => $nombrecumpleanero, 
             'cumpleanerosHoy' => $cumpleanerosHoy, 
+            'proximoOrdenacion' => $proximoOrdenacion, 
+            'nombreOrdenacion' => $nombreOrdenacion, 
+            'OrdenacionHoy' => $OrdenacionHoy, 
+            'hoy' => $hoy,
             'totalDiaconos' => $totalDiaconos,
-            'totalParroquia' => $totalParroquia,
             'salmoAleatorio' => $salmoAleatorio,
             'proverbioAleatorio' => $proverbioAleatorio,
             'salmoAleatorioNumero' => $salmoAleatorioNumero,

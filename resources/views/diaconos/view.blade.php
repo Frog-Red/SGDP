@@ -44,11 +44,6 @@
                     </div>
                 </div>
                 <hr>
-            </div>
-        
-            <div class="mb-3">
-                <h5 class="mb-4"><strong class="text-dark">Datos de Ordenacion</strong></h5>
-        
                 <div class="row">
                     <div class="col-md-4">
                         <p><strong>Fecha de Ordenacion:</strong> {{ $diacono->FechaOrdenacion }}</p>
@@ -67,11 +62,16 @@
                     </div>
         
                     <div class="col-md-4">
-                        <p><strong>Vicaria Ambiental:</strong> {{ $diacono->VicariaAmbientalAsignada }}</p>
+                        <p><strong>Vicaria Asignada:</strong> {{ $diacono->VicariaAmbientalAsignada }}</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p><strong>Numero de Decreto:</strong> {{ $diacono->NumeroDecreto }}</p>
                     </div>
                 </div>
                 <hr>
             </div>
+
         
             <div class="mb-3">
                 <h5 class="mb-4"><strong class="text-dark">Indicador de defuncion</strong></h5>

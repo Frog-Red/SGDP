@@ -143,7 +143,19 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         @endif
+        @if(auth()->check() && auth()->user()->hasAnyRole(2))
+        <div class="sidebar-heading">
+            Sacerdotes (experimental)
+        </div>
 
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('sacerdotes.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Sacerdotes</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">      
+        @endif
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

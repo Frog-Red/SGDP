@@ -1,4 +1,4 @@
-<!-- resources/views/diaconos/create.blade.php -->
+<!-- resources/views/sacerdote/create.blade.php -->
 @php
     $parroquias = \App\Models\Parroquia::all(); // Replace with your actual namespace and model
     $vicaria_ambiental =  \App\Models\vicaria_ambiental::all(); 
@@ -18,12 +18,12 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ route('diaconos.store') }}">
+            <form method="post" action="{{ route('sacerdotes.store') }}">
                 @csrf
 
                 <!-- Section 1 -->
                 <div class="mb-3">
-                    <h5 class="mb-4"><strong class="text-dark">Datos del Diacono</strong></h5>
+                    <h5 class="mb-4"><strong class="text-dark">Datos del Sacerdote</strong></h5>
                     <div class="row">
                         <div class="col-md-3">
                             <label for="nombre" class="form-label">Nombre:</label>
@@ -152,68 +152,10 @@
                         }
                     }
                 </script>
-                <!-- Section 4 -->
-                <div class="mb-3">
-                    <h5 class="mb-4"><strong class="text-dark">Informacion Civil</strong></h5>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label for="estadoCivil" class="form-label">Estado Civil:</label>
-                            <select class="form-control" id="estadoCivil" name="estadoCivil" onchange="toggleEstadoCivilOptions()">
-                                <option value="soltero">Soltero</option>
-                                <option value="casado">Casado</option>
-                                <option value="viudo">Viudo</option>
-                            </select>
-                        </div>
 
-
-                        <div class="mb-3" id="casadoOptions" style="display: none;">
-                            <div class="row">
-                            <!-- Include additional fields for casado here -->
-                            <div class="col-md-3">
-                                <label  for="nombreEsposa">Nombre Esposa:</label>
-                                <input class="form-control" type="text" name="nombreEsposa" value="{{ old('nombreEsposa') }}">
-                                </div>
-    
-                                <div class="col-md-3">
-                                <label  for="rutEsposa">Rut Esposa:</label>
-                                <input class="form-control" type="text" name="rutEsposa" value="{{ old('rutEsposa') }}">
-                               </div>
-                                
-                                <div class="col-md-3">
-                                <label  for="fechaNacimientoEsposa">Fecha Nacimiento:</label>
-                                <input class="form-control" type="date" name="fechaNacimientoEsposa" value="{{ old('fechaNacimientoEsposa') }}">
-                             </div>
-                            
-                                <div class="col-md-3">
-                                <label  for="fechaMatrimonio">Fecha Matrimonio:</label>
-                                <input class="form-control" type="date" name="fechaMatrimonio" value="{{ old('fechaMatrimonio') }}">
-                                </div>
-                        </div>
-                        </div>
-                    
-
-
-<!-- Additional options for when estadoCivil is 'viudo' -->
-                        <div id="viudoOptions" style="display: none;">
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="fechaDefuncionEsposa">Fecha Defunción:</label>
-                            <input class="form-control" type="date" name="fechaDefuncionEsposa" value="{{ old('fechaDefuncionEsposa') }}">
-                                    </div>
-                                <!-- Include additional fields for casado here -->
-                                
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                </div>
-                <!-- Repeat similar structures for the remaining sections -->
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Agregar Diacono</button>
+                    <button type="submit" class="btn btn-primary">Agregar Sacerdote</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>
@@ -221,21 +163,3 @@
     </div>
 </div>
 
-<script>
-    function toggleEstadoCivilOptions() {
-        var estadoCivil = document.getElementById('estadoCivil');
-        var casadoOptions = document.getElementById('casadoOptions');
-        var viudoOptions = document.getElementById('viudoOptions');
-
-        if (estadoCivil.value === 'casado') {
-            casadoOptions.style.display = 'block';
-            viudoOptions.style.display = 'none';
-        } else if (estadoCivil.value === 'viudo') {
-            casadoOptions.style.display = 'block';
-            viudoOptions.style.display = 'block';
-        } else {
-            casadoOptions.style.display = 'none';
-            viudoOptions.style.display = 'none';
-        }
-    }
-</script>

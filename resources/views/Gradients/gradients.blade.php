@@ -43,6 +43,9 @@
 .page11 {
     background: linear-gradient(to right,  #ffffffcc, #ffef5cbd);
 }
+.page12 {
+    background: linear-gradient(to right,  #8a3e12e1, #8a3e12e1);
+}
 
 
     </style>

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// app/Http/Controllers/DiaconoController.php
-
-use App\Models\Diacono;
+use App\Models\Sacerdote;
 use App\Models\Parroquia;
 use App\Models\vicaria_ambiental;
 use Illuminate\Http\Request;
@@ -13,88 +11,84 @@ use Illuminate\Database\QueryException;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 
-class DiaconoController extends Controller
+class SacerdoteController extends Controller
 {
 
     public function index()
     {
-        $diaconos = Diacono::all();
-        return view('diaconos.index', compact('diaconos'));
+        $sacerdotes = Sacerdote::all();
+        return view('sacerdotes.index', compact('sacerdotes'));
     }
 
     public function create()
     {      
         $vicaria_ambiental = vicaria_ambiental::all();
         $parroquias = Parroquia::all();
-        return view('diaconos.create', compact('parroquias','vicaria_ambiental'));
+        return view('sacerdotes.create', compact('parroquias','vicaria_ambiental'));
     }
     
 
     public function store(Request $request)
     {
-        $request->validate([
-            'RutDiáconoPadre' => 'exists:diaconos,Rut',
-            // Add other validation rules for other fields
-        ]);
         // Exclude _token from the request data
         $data = $request->except('_token');
 
-        // Create a new Diacono instance and save it to the database
-        Diacono::create($data);
+        // Create a new Sacerdote instance and save it to the database
+        Sacerdote::create($data);
 
         // Redirect or do something else after saving...
-        return redirect()->route('diaconos.index');
+        return redirect()->route('sacerdotes.index');
     }
 
     public function show($id)
     {
-        $diaconos = Diacono::find($id);
-        return view('diaconos.index', compact('diaconos'));
+        $sacerdotes = Sacerdote::find($id);
+        return view('sacerdotes.index', compact('sacerdotes'));
     }
 
     public function edit($id)
     {
-        $diacono = Diacono::find($id);
-        return view('diaconos.edit', compact('diacono'));
+        $sacerdote = Sacerdote::find($id);
+        return view('sacerdotes.edit', compact('sacerdote'));
     }
 
     public function update(Request $request, $id)
     {
-        $diacono = Diacono::find($id);
+        $sacerdote = Sacerdote::find($id);
         
         // Exclude _token from the update fields
         $data = $request->except(['_token']);
     
-        // Update the diacono with the remaining fields
-        $diacono->update($data);
+        // Update the sacerdote with the remaining fields
+        $sacerdote->update($data);
     
-        return redirect()->route('diaconos.index')->with('success', 'Diacono Actualizado exitosamente');
+        return redirect()->route('sacerdotes.index')->with('success', 'Sacerdote Actualizado exitosamente');
     }
 
     public function destroy($id)
     {
-        $diacono = Diacono::find($id);
-        $diacono->delete();
-        return redirect()->route('diaconos.index')->with('success', 'Diacono Eliminado exitosamente');
+        $sacerdote = Sacerdote::find($id);
+        $sacerdote->delete();
+        return redirect()->route('sacerdotes.index')->with('success', 'Sacerdote Eliminado exitosamente');
     }
     
     public function deleteAll(Request $request) {
         $ids = $request->ids;
-        Diacono::whereIn('id', $ids)->delete();
+        Sacerdote::whereIn('id', $ids)->delete();
     
         return response()->json(['success' => 'Diáconos seleccionados borrados exitosamente.']);
     }
 
     public function consultas()
     {
-        $diaconos = Diacono::all();
-        return view('consultas', compact('diaconos'));
+        $sacerdotes = Sacerdote::all();
+        return view('consultas', compact('sacerdotes'));
     }
 
 
     public function showCargaMasivaForm()
     {
-        return view('diaconos.carga_masiva');
+        return view('sacerdotes.carga_masiva');
     }
     private function excelToDateTime($excelTimestamp)
     {
@@ -157,10 +151,10 @@ class DiaconoController extends Controller
                 foreach ($row->getCellIterator() as $cell) {
                     $rowData[] = $cell->getValue();
                 }
-                // Procesa los datos del diacono usando $rowData
-                // Por ejemplo, puedes crear un nuevo Diacono utilizando los datos de cada fila
+                // Procesa los datos del Sacerdote usando $rowData
+                // Por ejemplo, puedes crear un nuevo Sacerdote utilizando los datos de cada fila
                 if (!empty($rowData[0])) {
-                    $diacono = new Diacono([
+                    $sacerdote = new Sacerdote([
                         'nombre' => $rowData[0], // Nombre del diácono
                         'rut' => $rowData[1], // Rut del diácono
                         'estadoVigencia' => $rowData[2], // Estado de vigencia del diácono
@@ -177,33 +171,28 @@ class DiaconoController extends Controller
                         'correoElectronico' => $rowData[13]?? null, // Correo electrónico del diácono
                         'indicadorDefuncion' => $rowData[14] === 'Fallecido' ? 1 : 0,
                         'fechaDefuncion' => !empty($rowData[15]) ? $this->excelToDateTime($rowData[15])->format('Y-m-d') : null,
-                        'estadoCivil' => $rowData[16], // Estado civil del diácono
-                        'nombreEsposa' => $rowData[17]?? null, // Nombre de la esposa del diácono
-                        'rutEsposa' => $rowData[18]?? null, // Rut de la esposa del diácono
-                        'fechaNacimientoEsposa' => !empty($rowData[19]) ? $this->excelToDateTime($rowData[19])->format('Y-m-d') : null,
-                        'fechaMatrimonio' => !empty($rowData[20]) ? $this->excelToDateTime($rowData[20])->format('Y-m-d') : null,
-                        'fechaDefuncionEsposa' => !empty($rowData[21]) ? $this->excelToDateTime($rowData[21])->format('Y-m-d') : null,
-                        'numeroDecreto' => $rowData[22]?? null, 
+                        'numeroDecreto' => $rowData[16]?? null, 
                     ]);
                     
-                    $diacono->save();
+                    $sacerdote->save();
 }
 }
 
-            return redirect()->route('diaconos.index')->with('success', 'Datos de diáconos importados correctamente.');
+            return redirect()->route('sacerdotes.index')->with('success', 'Datos de diáconos importados correctamente.');
         } catch (QueryException $e) {
             // Captura excepción de QueryException (error de consulta SQL)
-            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
+            return redirect()->route('sacerdotes.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
         } catch (Exception $e) {
             // Captura cualquier otra excepción
-            return redirect()->route('diaconos.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
+            return redirect()->route('sacerdotes.index')->with('error', 'Error al procesar el archivo Excel en la fila ' . ($rowNumber ) . ': ' . $e->getMessage());
         }
     }
 
     public function downloadTemplate()
     {
-        return response()->download(public_path('templates/diaconos_template.xlsx'));
+        return response()->download(public_path('templates/sacerdotes_template.xlsx'));
     }
 
 
 }
+

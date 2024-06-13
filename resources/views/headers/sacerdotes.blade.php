@@ -1,12 +1,11 @@
-<!-- resources/views/welcome.blade.php -->
 @include ('Gradients.gradients')
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Hijos</title>
+    <title>Lista de Diaconos</title>
    <!-- Custom fonts for this template -->
    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
    <link
@@ -20,7 +19,7 @@
    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
-<body class="page2">
+<body class="page12">
  <!-- Page Wrapper -->
  <div id="wrapper">
 
@@ -29,6 +28,8 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('welcome') }}">
+            <div class="sidebar-brand-icon rotate-n-15">
+            </div>
             <div class="sidebar-brand-text mx-3">Iglesia de santiago </div>
         </a>
 
@@ -51,8 +52,9 @@
 
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">  
-        
+        <hr class="sidebar-divider d-none d-md-block">    
+
+
         @if(auth()->check() && auth()->user()->hasAnyRole(3))
         <div class="sidebar-heading">
             Consultas
@@ -64,7 +66,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Consultas</span></a>
         </li>
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block">      
         @endif
         
         @if(auth()->check() && auth()->user()->hasAnyRole(2))
@@ -79,7 +81,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Diaconos</span></a>
         </li>
-        <li class="nav-item  active">
+        <li class="nav-item ">
             <a class="nav-link" href="{{ route('hijos.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Hijos</span></a>
@@ -143,13 +145,15 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         @endif
+
+        
         @if(auth()->check() && auth()->user()->hasAnyRole(2))
         <div class="sidebar-heading">
             Sacerdotes (experimental)
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="{{ route('sacerdotes.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Sacerdotes</span></a>

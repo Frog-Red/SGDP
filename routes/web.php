@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiaconoController;
+use App\Http\Controllers\SacerdoteController;
 use App\Http\Controllers\HijosController;
 use App\Http\Controllers\ParroquiaController;
 use App\Http\Controllers\VicariaZonalController;
@@ -30,10 +31,14 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('diaconos/carga-masiva', [DiaconoController::class, 'showCargaMasivaForm'])->name('diaconos.cargaMasiva')->middleware('roles:2');
+    Route::get('sacerdotes/carga-masiva', [SacerdoteController::class, 'showCargaMasivaForm'])->name('sacerdotes.cargaMasiva')->middleware('roles:2');
     Route::post('diaconos/import', [DiaconoController::class, 'import'])->name('diaconos.import')->middleware('roles:2');
+    Route::post('sacerdotes/import', [SacerdoteController::class, 'import'])->name('sacerdotes.import')->middleware('roles:2');
     Route::get('diaconos/download-template', [DiaconoController::class, 'downloadTemplate'])->name('diaconos.downloadTemplate')->middleware('roles:2');
+    Route::get('sacerdotes/download-template', [SacerdoteController::class, 'downloadTemplate'])->name('sacerdotes.downloadTemplate')->middleware('roles:2');
     Route::get('/consultas', [DiaconoController::class, 'consultas'])->name('consultas')->middleware('roles:3');
     Route::resource('diaconos', DiaconoController::class)->middleware('roles:2');
+    Route::resource('sacerdotes', SacerdoteController::class)->middleware('roles:2');
     Route::resource('hijos', HijosController::class)->middleware('roles:2');
     Route::resource('parroquia', ParroquiaController::class)->middleware('roles:1');
     Route::resource('vicaria_zonal', VicariaZonalController::class)->middleware('roles:1');
@@ -47,7 +52,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contrasena', 'App\Http\Controllers\UserController@showChangePasswordForm')->name('contrasena');
     Route::post('/contrasena', 'App\Http\Controllers\UserController@changePassword')->name('contrasena.post');
     Route::post('/diaconos/delete-selected', 'DiaconoController@deleteSelected')->name('diaconos.deleteSelected');
+    Route::post('/sacerdotes/delete-selected', 'SacerdoteController@deleteSelected')->name('sacerdotes.deleteSelected');
     Route::delete('/selected-diacono',[DiaconoController::class, 'deleteAll'])->name('diacono.delete');
+    Route::delete('/selected-sacerdote',[SacerdoteController::class, 'deleteAll'])->name('sacerdote.delete');
+
 });
 
 Auth::routes();

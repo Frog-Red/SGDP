@@ -17,85 +17,85 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ route('diaconos.update', $diacono->id) }}">
+            <form method="post" action="{{ route('sacerdotes.update', $sacerdote->id) }}">
                 @csrf
                 @method('PUT')
 
                 <!-- Section 1 -->
                 <div class="mb-3">
-                    <h5 class="mb-4"><strong class="text-dark">Datos del Diacono</strong></h5>
+                    <h5 class="mb-4"><strong class="text-dark">Datos del Sacerdote</strong></h5>
                     <div class="row">
                         <div class="col-md-3">
                             <label for="nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $diacono->Nombre }}" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $sacerdote->Nombre }}" required>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="rut" class="form-label">Rut:</label>
-                            <input type="text" class="form-control" id="rut" name="rut" value="{{ $diacono->Rut }}" required>
+                            <input type="text" class="form-control" id="rut" name="rut" value="{{ $sacerdote->Rut }}" required>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="estadoVigencia" class="form-label">Estado de vigencia:</label>
                             <select class="form-control" id="estadoVigencia" name="estadoVigencia" onchange="toggleestadoVigenciaOptions()">
-                                <option value="Activo" @if($diacono->EstadoVigencia == 'Activo') selected @endif>Activo</option>
-                                <option value="Suspendido" @if($diacono->EstadoVigencia == 'Suspendido') selected @endif>Suspendido</option>
-                                <option value="Dimitido" @if($diacono->EstadoVigencia == 'Dimitido') selected @endif>Dimitido</option>
-                                <option value="Fallecido" @if($diacono->EstadoVigencia == 'Fallecido') selected @endif>Fallecido</option>
+                                <option value="Activo" @if($sacerdote->EstadoVigencia == 'Activo') selected @endif>Activo</option>
+                                <option value="Suspendido" @if($sacerdote->EstadoVigencia == 'Suspendido') selected @endif>Suspendido</option>
+                                <option value="Dimitido" @if($sacerdote->EstadoVigencia == 'Dimitido') selected @endif>Dimitido</option>
+                                <option value="Fallecido" @if($sacerdote->EstadoVigencia == 'Fallecido') selected @endif>Fallecido</option>
                             </select>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
-                            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{ $diacono->FechaNacimiento }}" required>
+                            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{ $sacerdote->FechaNacimiento }}" required>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="profesionOficio" class="form-label">Profesión u Oficio:</label>
-                            <input type="text" class="form-control" id="profesionOficio" name="profesionOficio" value="{{ $diacono->ProfesionOficio }}">
+                            <input type="text" class="form-control" id="profesionOficio" name="profesionOficio" value="{{ $sacerdote->ProfesionOficio }}">
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="direccionParticular" class="form-label">Dirección Particular:</label>
-                            <input type="text" class="form-control" id="direccionParticular" name="direccionParticular" value="{{ $diacono->DireccionParticular }}">
+                            <input type="text" class="form-control" id="direccionParticular" name="direccionParticular" value="{{ $sacerdote->DireccionParticular }}">
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="telefonoCelular" class="form-label">Teléfono Celular:</label>
-                            <input type="text" class="form-control" id="telefonoCelular" name="telefonoCelular" value="{{ $diacono->TelefonoCelular }}">
+                            <input type="text" class="form-control" id="telefonoCelular" name="telefonoCelular" value="{{ $sacerdote->TelefonoCelular }}">
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="telefonoFijo" class="form-label">telefono Fijo:</label>
-                            <input type="text" class="form-control" id="telefonoFijo" name="telefonoFijo" value="{{ $diacono->TelefonoFijo }}">
+                            <input type="text" class="form-control" id="telefonoFijo" name="telefonoFijo" value="{{ $sacerdote->TelefonoFijo }}">
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="correoElectronico" class="form-label">Correo Electrónico:</label>
-                            <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" value="{{ $diacono->CorreoElectronico }}">
+                            <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" value="{{ $sacerdote->CorreoElectronico }}">
                         </div>
                     </div>
                     <hr>
                         <div class="row">
                         <div class="col-md-3">
                             <label for="fechaOrdenacion" class="form-label">Fecha de Ordenacion:</label>
-                            <input type="date" class="form-control" id="fechaOrdenacion" name="fechaOrdenacion" value="{{ $diacono->FechaOrdenacion }}" required>
+                            <input type="date" class="form-control" id="fechaOrdenacion" name="fechaOrdenacion" value="{{ $sacerdote->FechaOrdenacion }}" required>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="lugarOrdenacion" class="form-label">Lugar de Ordenación:</label>
-                            <input type="text" class="form-control" id="lugarOrdenacion" name="lugarOrdenacion" value="{{ $diacono->LugarOrdenacion }}" required>
+                            <input type="text" class="form-control" id="lugarOrdenacion" name="lugarOrdenacion" value="{{ $sacerdote->LugarOrdenacion }}" required>
                         </div>
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="nombreObispoOrdeno" class="form-label">Nombre del Obispo que Ordeno</label>
-                            <input type="text" class="form-control" id="nombreObispoOrdeno" name="nombreObispoOrdeno" value="{{ $diacono->NombreObispoOrdeno }}">
+                            <input type="text" class="form-control" id="nombreObispoOrdeno" name="nombreObispoOrdeno" value="{{ $sacerdote->NombreObispoOrdeno }}">
                         </div>
                         <div class="col-md-3">
                             <label for="parroquiaAsignada" class="form-label">Parroquia asignada:</label>
                             <select class="form-control" id="parroquiaAsignada" name="parroquiaAsignada" required>
                                 @foreach($parroquias as $parroquia)
-                                    <option value="{{ $parroquia->NombreParroquia }}" {{ $diacono->ParroquiaAsignada == $parroquia->NombreParroquia ? 'selected' : '' }}>
+                                    <option value="{{ $parroquia->NombreParroquia }}" {{ $sacerdote->ParroquiaAsignada == $parroquia->NombreParroquia ? 'selected' : '' }}>
                                         {{ $parroquia->NombreParroquia }}
                                     </option>
                                 @endforeach
@@ -106,12 +106,12 @@
                             <label for="vicariaAmbientalAsignada" class="form-label">Vicaría Asignada</label>
                             <select class="form-control" id="vicariaAmbientalAsignada" name="vicariaAmbientalAsignada">
                                 @foreach($vicaria_ambiental as $VICARIA)
-                                    <option value="{{ $VICARIA->NombreVicariaAmbiental }}" {{ $diacono->VicariaAmbientalAsignada == $VICARIA->NombreVicariaAmbiental ? 'selected' : '' }}>
+                                    <option value="{{ $VICARIA->NombreVicariaAmbiental }}" {{ $sacerdote->VicariaAmbientalAsignada == $VICARIA->NombreVicariaAmbiental ? 'selected' : '' }}>
                                         {{ $VICARIA->NombreVicariaAmbiental }}
                                     </option>
                                 @endforeach
                                 @foreach($vicaria_zonal as $Z)
-                                    <option value="{{ $Z->NombreVicariaZonal }}" {{ $diacono->VicariaAmbientalAsignada == $Z->NombreVicariaZonal ? 'selected' : '' }}>
+                                    <option value="{{ $Z->NombreVicariaZonal }}" {{ $sacerdote->VicariaAmbientalAsignada == $Z->NombreVicariaZonal ? 'selected' : '' }}>
                                         {{ $Z->NombreVicariaZonal }}
                                     </option>
                                 @endforeach
@@ -120,7 +120,7 @@
                         <div class="col-md-3">
                             <!-- Add other fields for Section 1 -->
                             <label for="numeroDecreto" class="form-label">Numero de Decreto:</label>
-                            <input type="text" class="form-control" id="numeroDecreto" name="numeroDecreto" value="{{ $diacono->NumeroDecreto }}" required>
+                            <input type="text" class="form-control" id="numeroDecreto" name="numeroDecreto" value="{{ $sacerdote->NumeroDecreto }}" required>
                         </div>
                     </div>
                     <hr>
@@ -135,68 +135,22 @@
                             <!-- Use a select dropdown for indicadorDefuncion -->
                             <label for="indicadorDefuncion" class="form-label">Indicador de Defunción:</label>
                             <select class="form-control" id="indicadorDefuncion" name="indicadorDefuncion" onchange="toggleFechaDefuncionVisibility()">
-                                <option value="0" @if($diacono->IndicadorDefuncion == 0) selected @endif>Vivo</option>
-                                <option value="1" @if($diacono->IndicadorDefuncion == 1) selected @endif>Fallecido</option>
+                                <option value="0" @if($sacerdote->IndicadorDefuncion == 0) selected @endif>Vivo</option>
+                                <option value="1" @if($sacerdote->IndicadorDefuncion == 1) selected @endif>Fallecido</option>
                             </select>
                         </div>
                     <div class="col-md-3">
                         <!-- Add other fields for Section 1 -->
                         <label for="fechaDefuncion" class="form-label">Fecha de Defuncion:</label>
-                        <input type="date" class="form-control" id="fechaDefuncion" name="fechaDefuncion" value="{{ $diacono->FechaDefuncion }}">
+                        <input type="date" class="form-control" id="fechaDefuncion" name="fechaDefuncion" value="{{ $sacerdote->FechaDefuncion }}">
                          </div>
                      </div>
                      <hr>
                 </div>
 
-                <!-- Section 4 -->
-                <div class="mb-3">
-                    <h5 class="mb-4"><strong class="text-dark">Informacion Civil</strong></h5>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="estadoCivil" class="form-label">Estado Civil:</label>
-                            <select class="form-control" id="estadoCivil" name="estadoCivil" onchange="toggleEstadoCivilOptions()">
-                                <option value="soltero" @if($diacono->EstadoCivil == 'soltero' || $diacono->EstadoCivil == 'Soltero') selected @endif>Soltero</option>
-                                <option value="casado" @if($diacono->EstadoCivil == 'casado'|| $diacono->EstadoCivil == 'Casado') selected @endif>Casado</option>
-                                <option value="viudo" @if($diacono->EstadoCivil == 'viudo'|| $diacono->EstadoCivil == 'Viudo') selected @endif>Viudo</option>
-                            </select>
-                        </div>
-
-                        @if($diacono->EstadoCivil == 'casado' || $diacono->EstadoCivil == 'viudo'|| $diacono->EstadoCivil == 'Viudo' || $diacono->EstadoCivil == 'Casado')
-                        <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
-                            <label for="nombreEsposa" class="form-label">Nombre Esposa:</label>
-                            <input type="text" class="form-control" id="nombreEsposa" name="nombreEsposa" value="{{ $diacono->NombreEsposa }}">
-                        </div>
-                        <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
-                            <label for="rutEsposa" class="form-label">Rut Esposa</label>
-                            <input type="text" class="form-control" id="rutEsposa" name="rutEsposa" value="{{ $diacono->RutEsposa }}">
-                        </div>
-                        <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
-                            <label for="fechaNacimientoEsposa" class="form-label">Fecha Nacimiento Esposa</label>
-                            <input type="date" class="form-control" id="fechaNacimientoEsposa" name="fechaNacimientoEsposa" value="{{ $diacono->FechaNacimientoEsposa }}">
-                        </div>
-                        <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
-                            <label for="fechaMatrimonio" class="form-label">Fecha Matrimonio</label>
-                            <input type="date" class="form-control" id="fechaMatrimonio" name="fechaMatrimonio" value="{{ $diacono->FechaMatrimonio }}">
-                        </div>
-                        @endif
-
-                        @if($diacono->EstadoCivil == 'viudo')
-
-                        <div class="col-md-3">
-                            <!-- Add other fields for Section 1 -->
-                            <label for="fechaDefuncionEsposa" class="form-label">Fecha Defuncion Esposa</label>
-                            <input type="date" class="form-control" id="fechaDefuncionEsposa" name="fechaDefuncionEsposa" value="{{ $diacono->FechaDefuncionEsposa }}">
-                        </div>
-                        @endif
-                    </div>
-                </div>
                 <!-- Repeat similar structures for the remaining sections -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Actualizar Diacono</button>
+                    <button type="submit" class="btn btn-primary">Actualizar Sacerdote</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>

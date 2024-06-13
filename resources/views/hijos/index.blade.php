@@ -1,5 +1,4 @@
 @include('headers.hijos')
-
           
           <!-- Begin Page Content -->
           <div class="container-fluid">
@@ -23,7 +22,8 @@
                         <table class="table table-bordered text-gray-800" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Rut Diacono padre</th>
+                                    <th>Nombre del padre</th>
+                                    <th>Rut del padre</th>
                                     <th>Rut Hijo</th>
                                     <th>sexo</th>
                                     <th>Nombre</th>
@@ -35,6 +35,17 @@
                             <tbody>
                                 @foreach($hijos as $HIJOS)
                                     <tr>
+                                        <td>
+                                            {{-- Buscar el nombre del diácono padre --}}
+                                            @php
+                                                $diacPadre = App\Models\Diacono::where('Rut', $HIJOS->RutDiáconoPadre)->first();
+                                            @endphp
+                                            @if ($diacPadre)
+                                                {{ $diacPadre->Nombre }}
+                                            @else
+                                                No encontrado
+                                            @endif
+                                        </td>
                                         <td>{{ $HIJOS->RutDiáconoPadre }}</td>
                                         <td>{{ $HIJOS->RutHijo }}</td>
                                         <td>{{ $HIJOS->SexoHijo }}</td>

@@ -46,10 +46,6 @@
                 </select>
                 
 
-                <hr>
-
-                <label for="NumeroSecuenciaEvento">Numero de Secuencia del Evento:</label>
-                <input class="form-control" type="text" name="NumeroSecuenciaEvento" value="{{ $historial_diacono->NumeroSecuenciaEvento }}" required>
 
                 <hr>
 
@@ -61,10 +57,6 @@
                 <label for="ComentariosEvento">Comentarios:</label>
                 <input class="form-control" type="text" name="ComentariosEvento" value="{{ $historial_diacono->ComentariosEvento }}" required>
 
-                <hr>
-
-                <label for="CodigoUsuarioRegistro">Codigo de Usuario Registro:</label>
-                <input class="form-control" type="text" name="CodigoUsuarioRegistro" value="{{ $historial_diacono->CodigoUsuarioRegistro }}" required>
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Update</button>

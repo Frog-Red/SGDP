@@ -18,6 +18,7 @@ class Diacono extends Model
         'profesionOficio',
         'parroquiaAsignada',
         'vicariaAmbientalAsignada',
+        'numeroDecreto',
         'direccionParticular',
         'telefonoCelular',
         'telefonoFijo',

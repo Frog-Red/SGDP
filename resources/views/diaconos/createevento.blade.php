@@ -45,20 +45,15 @@
 
                     <hr>
 
-                    <label for="NumeroSecuenciaEvento">Numero de Secuencia del Evento:</label>
-                    <input class="form-control" type="text" name="NumeroSecuenciaEvento" value="{{ old('NumeroSecuenciaEvento') }}" required>
-
-                    <hr>
-
                     <label for="FechaEvento">Fecha del Evento:</label>
                     <input class="form-control"type="date" name="FechaEvento" value="{{ old('FechaEvento') }}" required>
 
                     <hr>
                     <label for="ComentariosEvento">Comentarios:</label>
                     <input class="form-control"type="text" name="ComentariosEvento" value="{{ old('ComentariosEvento') }}" required>
-                    <hr>
-                    <label for="CodigoUsuarioRegistro">Codigo de Usuario Registro:</label>
-                    <input class="form-control"type="text" name="CodigoUsuarioRegistro" value="{{ old('CodigoUsuarioRegistro') }}" required>
+                    @auth
+                    <input type="hidden" name="CodigoUsuarioRegistro" value="{{ auth()->id() }}" required>
+                @endauth
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Agregar</button>

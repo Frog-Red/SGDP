@@ -25,7 +25,6 @@
                                 <tr>
                                 <th>Rut Diacono</th>
                                 <th>Codigo</th>
-                                <th>Codigo del Evento</th>
                                 <th>Fecha del Evento</th>
                                 <th>Comentarios</th>
                                 <th>Codigo de Usuario</th>
@@ -37,7 +36,6 @@
                             @foreach($historial_diacono as $HISTORIAL_DIACONO)
                                 <tr>
                                     <td>{{ $HISTORIAL_DIACONO->RutDiacono }}</td>
-                                    <td>{{ $HISTORIAL_DIACONO->NumeroSecuenciaEvento }}</td>
                                     <td>{{ $HISTORIAL_DIACONO->CodigoTipoEvento }}</td>
                                     <td>{{ $HISTORIAL_DIACONO->FechaEvento }}</td>
                                     <td>{{ $HISTORIAL_DIACONO->ComentariosEvento}}</td>
