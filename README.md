@@ -95,6 +95,8 @@ Este manual tiene como objetivo guiar paso a paso la instalación del sistema en
 
 2. **Acceder al Sistema**:
    - Abra un navegador web y diríjase a `http://localhost/` o la URL configurada.
+   - Usuarios para ingresar al sistema: fjerez@utem.cl, usuario@usuario.cl, mantenedor@mantenedor.cl, administrador@administrador.cl
+   - la Contraseña para todos los usuarios es "12345678"
 
 ---
 
